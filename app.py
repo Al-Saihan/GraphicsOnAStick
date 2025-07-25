@@ -24,12 +24,15 @@ def outcode(x, y, xmin, xmax, ymin, ymax):
 
 
 def cohenClipping(x0, y0, x1, y1, xmin, xmax, ymin, ymax):
-    log_print(f"Initial Endpoints: ({x0}, {y0}) to ({x1}, {y1})")
+    log_print(
+        f"Initial Endpoints: \nStarting Point: ({x0}, {y0})\nEnding Point: ({x1}, {y1})"
+    )
     outcode0 = outcode(x0, y0, xmin, xmax, ymin, ymax)
     outcode1 = outcode(x1, y1, xmin, xmax, ymin, ymax)
     log_print(
-        f"Initial Outcodes: outcode0 = {format(outcode0, '04b')}, outcode1 = {format(outcode1, '04b')}"
+        f"Initial Outcodes: \noutcode0 = {format(outcode0, '04b')}\noutcode1 = {format(outcode1, '04b')}"
     )
+    log_print("-" * 40)
 
     accept = False
 
@@ -37,13 +40,14 @@ def cohenClipping(x0, y0, x1, y1, xmin, xmax, ymin, ymax):
         if not (outcode0 | outcode1):
             accept = True
             log_print("Both points inside. Line accepted!")
+            log_print("-" * 40)
             break
         elif outcode0 & outcode1:
             log_print("Both points share an outside region. Line rejected.")
+            log_print("-" * 40)
             break
         else:
             outcode_out = outcode0 if outcode0 else outcode1
-            log_print("-" * 40)
             log_print(f"Clipping point with outcode: {format(outcode_out, '04b')}")
             x, y = 0.0, 0.0
 
@@ -71,11 +75,16 @@ def cohenClipping(x0, y0, x1, y1, xmin, xmax, ymin, ymax):
             if outcode_out == outcode0:
                 x0, y0 = x, y
                 outcode0 = outcode(x0, y0, xmin, xmax, ymin, ymax)
-                log_print(f"Updated point 0: ({x0}, {y0}), outcode = {format(outcode0, '04b')}")
+                log_print(
+                    f"Updated point 0: ({x0}, {y0}), outcode = {format(outcode0, '04b')}"
+                )
             else:
                 x1, y1 = x, y
                 outcode1 = outcode(x1, y1, xmin, xmax, ymin, ymax)
-                log_print(f"Updated point 1: ({x1}, {y1}), outcode = {format(outcode1, '04b')}")
+                log_print(
+                    f"Updated point 1: ({x1}, {y1}), outcode = {format(outcode1, '04b')}"
+                )
+            log_print("-" * 40)
 
     if accept:
         log_print(f"Final Clipped Line: ({x0}, {y0}) to ({x1}, {y1})")
@@ -91,7 +100,15 @@ def visualizeCohenClip(x0, y0, x1, y1, xmin, xmax, ymin, ymax):
 
     # Before clipping
     axs[0].plot(rect_x, rect_y, "k--", linewidth=1.5)
-    axs[0].arrow(x0, y0, x1 - x0, y1 - y0, head_width=0.3, length_includes_head=True, color="blue")
+    axs[0].arrow(
+        x0,
+        y0,
+        x1 - x0,
+        y1 - y0,
+        head_width=0.3,
+        length_includes_head=True,
+        color="blue",
+    )
     axs[0].scatter([x0, x1], [y0, y1], color="blue")
     axs[0].set_title("Before Clipping")
     axs[0].set_aspect("equal")
@@ -102,12 +119,25 @@ def visualizeCohenClip(x0, y0, x1, y1, xmin, xmax, ymin, ymax):
     if clipped:
         cx0, cy0, cx1, cy1 = clipped
         axs[1].arrow(
-            cx0, cy0, cx1 - cx0, cy1 - cy0, head_width=0.3, length_includes_head=True, color="green"
+            cx0,
+            cy0,
+            cx1 - cx0,
+            cy1 - cy0,
+            head_width=0.3,
+            length_includes_head=True,
+            color="green",
         )
         axs[1].scatter([cx0, cx1], [cy0, cy1], color="green")
         axs[1].set_title("After Clipping")
     else:
-        axs[1].text(0.5, 0.5, "Line Outside", ha="center", va="center", transform=axs[1].transAxes)
+        axs[1].text(
+            0.5,
+            0.5,
+            "Line Outside",
+            ha="center",
+            va="center",
+            transform=axs[1].transAxes,
+        )
     axs[1].set_aspect("equal")
 
     return fig
@@ -115,7 +145,7 @@ def visualizeCohenClip(x0, y0, x1, y1, xmin, xmax, ymin, ymax):
 
 # --- Streamlit UI ---
 
-st.title("🧮 Cohen–Sutherland Line Clipping Visualization")
+st.title("Cohen-Sutherland Line Clipping Visualization")
 
 st.sidebar.header("Line Segment Points:")
 x0 = st.sidebar.number_input("x0", value=2)
@@ -129,7 +159,7 @@ xmax = st.sidebar.number_input("x_max", value=10)
 ymin = st.sidebar.number_input("y_min", value=4)
 ymax = st.sidebar.number_input("y_max", value=8)
 
-if st.button("Run 'Cohen–Sutherland'"):
+if st.button("Run 'Cohen-Sutherland'"):
     log.truncate(0)
     log.seek(0)
 
@@ -137,5 +167,5 @@ if st.button("Run 'Cohen–Sutherland'"):
     st.pyplot(fig)
 
     # Output calculation log
-    st.subheader("📋 Detailed Clipping Steps:")
+    st.subheader("Detailed Clipping Steps:")
     st.code(log.getvalue(), language="text")
