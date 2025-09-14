@@ -1,0 +1,215 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #130b1b 0%, #2a1a1a 100%);
+    color: #e0e0e0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1000px;
+    width: 100%;
+    text-align: center;
+    padding: 30px;
+}
+.back-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(45deg, #6a5acd, #6a0dad);
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    margin-bottom: 30px;
+}
+
+.back-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(106, 90, 205, 0.4);
+}
+
+.chapters-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin: 30px 0;
+}
+
+.chapter-card {
+    background: rgba(40, 44, 52, 0.8);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chapter-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.chapter-card h2 {
+    color: #daa2eb;
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+}
+
+.chapter-card p {
+    color: #a0aec0;
+    font-size: 1rem;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #1f1c2c 0%, #2a1a1a 100%);
+    border-radius: 15px;
+    padding: 30px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.5rem;
+    color: #daa2eb;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+.modal-title {
+    color: #daa2eb;
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+.problems-list {
+    list-style-type: none;
+    margin: 20px 0;
+}
+
+.problems-list li {
+    background: rgba(40, 44, 52, 0.6);
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+    cursor: pointer;
+}
+
+.problems-list li:hover {
+    background: rgba(40, 44, 52, 0.9);
+}
+
+header {
+    margin-bottom: 40px;
+}
+
+h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #daa2eb;
+    text-shadow: 0 2px 10px rgba(106, 176, 222, 0.3);
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: #a0aec0;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.main-content {
+    margin: 50px 0;
+}
+
+.start-btn {
+    display: inline-block;
+    padding: 18px 50px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(45deg, #9e68c3, #8a64d0);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(78, 84, 200, 0.4);
+    text-decoration: none;
+    margin: 20px 0;
+}
+
+.start-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(78, 84, 200, 0.6);
+    background: linear-gradient(45deg, #c15fd5, #5727a4);
+}
+
+.start-btn:active {
+    transform: translateY(1px);
+}
+
+footer {
+    margin-top: 40px;
+    color: #718096;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2.2rem;
+    }
+    .subtitle {
+        font-size: 1rem;
+    }
+    .start-btn {
+        padding: 15px 40px;
+        font-size: 1.2rem;
+    }
+    .features {
+        flex-direction: column;
+    }
+    .chapters-container {
+        grid-template-columns: 1fr;
+    }
+    .chapter-card {
+        padding: 20px;
+    }
+}
